@@ -18,6 +18,9 @@ namespace ImageProcessor.Controller
         void EdgeDetect();
         void GaussianBlur();
         void Sharpen();
+        void Grayscale();
+
+        void Carve();
 
         void Undo();
         void Redo();

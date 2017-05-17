@@ -87,7 +87,7 @@ namespace ImageProcessor
         {
             double param = Utilities.Utilities.Clamp((int)Utilities.Utilities.GetParameters("Brightness ", "Brightness value: "), -255, 255);
             this.controller.FilterParam = param;
-            this.menuStrip1.Enabled = false;
+            this.mainMenu.Enabled = false;
             this.controller.Brightness();
         }
 
@@ -95,33 +95,37 @@ namespace ImageProcessor
         {
             double param = Utilities.Utilities.Clamp((int)Utilities.Utilities.GetParameters("Contrast ", "Contrast value: "), -100, 100);
             this.controller.FilterParam = param;
-            this.menuStrip1.Enabled = false;
+            this.mainMenu.Enabled = false;
             this.controller.Contrast();
         }
 
         private void WaterFilter(object sender, EventArgs e)
         {
-            double param = Utilities.Utilities.Clamp((int)Utilities.Utilities.GetParameters("Water ", "Wave value: "), -100, 100);
+            double param = Utilities.Utilities.Clamp((int)Utilities.Utilities.GetParameters("Water ", "Wave value: "), 15, 50);
             this.controller.FilterParam = param;
-            this.menuStrip1.Enabled = false;
+            this.mainMenu.Enabled = false;
             this.controller.Water();
         }
 
         private void EdgeDetectFilter(object sender, EventArgs e)
         {
             
-            this.menuStrip1.Enabled = false;
+            this.mainMenu.Enabled = false;
             this.controller.EdgeDetect();
         }
 
         private void Sharpen(object sender, EventArgs e)
         {
+            double param = Utilities.Utilities.Clamp((int)Utilities.Utilities.GetParameters("Sharpen ", "Sharpness: "), 11, 50);
+            this.controller.FilterParam = param;
+            this.mainMenu.Enabled = false;
             this.controller.Sharpen();
         }
 
         private void Grayscale(object sender, EventArgs e)
         {
-
+            this.mainMenu.Enabled = false;
+            this.controller.Grayscale();
         }
 
         private void Gamma(object sender, EventArgs e)
@@ -143,14 +147,38 @@ namespace ImageProcessor
             }));
         }
 
-        private void editToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
+  
 
         public void Redraw()
         {
             this.Refresh();
+        }
+
+        private void GaussianBlur(object sender, EventArgs e)
+        {
+            double param = Utilities.Utilities.Clamp((int)Utilities.Utilities.GetParameters("Gaussian blur ", "Blur parameter: "), 1, 4);
+            this.controller.FilterParam = param;
+            this.mainMenu.Enabled = false;
+            this.controller.GaussianBlur();
+        }
+
+        private void SeamCarving(object sender, EventArgs e)
+        {
+            double param = Utilities.Utilities.Clamp((int)Utilities.Utilities.GetParameters("Seam Carving ", "Width - : "), 1, 100);
+            this.controller.FilterParam = param;
+            this.mainMenu.Enabled = false;
+
+            this.controller.Carve();
+    
+            MessageBox.Show("Fucking done");
+        }
+
+        public void RedrawImageOnly()
+        {
+            this.BeginInvoke(new MethodInvoker(delegate
+            {
+                this.Refresh();
+            }));
         }
     }
 }

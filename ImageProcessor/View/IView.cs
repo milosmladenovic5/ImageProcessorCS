@@ -13,6 +13,7 @@ namespace ImageProcessor.View
         string ImageInfo { set;}
 
         void RedrawInvoker();
+        void RedrawImageOnly();
         void Redraw();
 
     }

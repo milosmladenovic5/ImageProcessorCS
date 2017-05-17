@@ -111,12 +111,28 @@ namespace ImageProcessor.Controller
 
         public void GaussianBlur()
         {
-            throw new NotImplementedException();
+            new Thread(() =>
+            {
+                this.undoRedo.PushToUndoStack((Bitmap)this.model.Image.Clone());
+                this.undoRedo.ClearRedoStack();
+
+                ConvFilters.GaussianBlur(this.model.Image, (int)this.filterParam);
+                this.view.RedrawInvoker();
+
+            }).Start();
         }
 
         public void Sharpen()
         {
-            throw new NotImplementedException();
+            new Thread(() =>
+            {
+                this.undoRedo.PushToUndoStack((Bitmap)this.model.Image.Clone());
+                this.undoRedo.ClearRedoStack();
+
+                ConvFilters.Sharpen(this.model.Image, (int)this.filterParam);
+                this.view.RedrawInvoker();
+
+            }).Start();
         }
 
         public void Undo()
@@ -141,6 +157,40 @@ namespace ImageProcessor.Controller
                 this.view.Image = this.model.Image;
                 this.view.Redraw();
             }
+        }
+
+        public void Grayscale()
+        {
+            this.undoRedo.PushToUndoStack((Bitmap)this.model.Image.Clone());
+            this.undoRedo.ClearRedoStack();
+
+            BasicFilters.GrayscaleMarshal(this.model.Image);
+            this.view.RedrawInvoker();
+        }
+
+        public void Carve()
+        {
+            this.undoRedo.PushToUndoStack((Bitmap)this.model.Image.Clone());
+            this.undoRedo.ClearRedoStack();
+
+            
+            new Thread(() =>
+            {
+                for (int i = 0; i < this.filterParam; i++)
+                {
+                    SeamCarving s = new SeamCarving(this.model.Image);
+                    s.Prepare();
+
+                    this.model.Image = s.GetCarvedBitmap();
+                    this.view.Image = this.model.Image;
+                    this.view.RedrawImageOnly();
+
+
+                    this.view.ImageInfo = this.model.Image.Width + "x" + this.model.Image.Height;
+                }
+                this.view.RedrawInvoker();
+
+            }).Start();
         }
     }
 }

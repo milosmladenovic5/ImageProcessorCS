@@ -52,7 +52,7 @@ namespace ImageProcessor.Model
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            openFileDialog.InitialDirectory = path; /*"c:\\";*/
+            openFileDialog.InitialDirectory = path;
             openFileDialog.Filter = "Bitmap files (*.bmp)|*.bmp|Jpeg files (*.jpg)|*.jpg|GIF files(*.gif)|*.gif|PNG files(*.png)|*.png|All valid files|*.bmp/*.jpg/*.gif/*.png";
             openFileDialog.FilterIndex = 2;
             openFileDialog.RestoreDirectory = true;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -54,6 +55,64 @@ namespace ImageProcessor.Filters
             b.UnlockBits(bmData);
 
             return true;
+        }
+
+        public static void Grayscale2(Bitmap b)
+        {
+            BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            int stride = bmData.Stride;
+            IntPtr Scan0 = bmData.Scan0;
+            byte gray;
+
+            unsafe
+            {
+                byte* p = (byte*)(void*)Scan0;
+
+                int nOffset = stride - b.Width * 3;
+
+                for (int y = 0; y < b.Height; ++y)
+                {
+                    for (int x = 0; x < b.Width; ++x)
+                    {
+                        gray = (byte)(0.299 * p[2] +
+                                    0.587 * p[1] +
+                                    0.114 * p[0]);
+
+                        p[0] = p[1] = p[2] = gray;
+                        p += 3;
+                    }
+                    p += nOffset;
+                }
+
+            }
+            b.UnlockBits(bmData);
+        }
+
+
+        public static void GrayscaleMarshal(Bitmap b)
+        {
+            BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            int size = bmData.Stride * bmData.Height;
+
+            byte[] p = new byte[size];
+            Marshal.Copy(bmData.Scan0, p, 0, size);
+            byte gray;
+
+
+            for (int i = 0; (i + 2) < size; i += 3)
+            {
+                gray = (byte)(0.299 * p[i + 2] +
+                                       0.587 * p[i + 1] +
+                                       0.114 * p[i]);
+
+                p[i] = p[i + 1] = p[i + 2] = gray;
+
+
+            }
+            Marshal.Copy(p, 0, bmData.Scan0, p.Length);
+            b.UnlockBits(bmData);
         }
 
         public static bool Brightness(Bitmap b, int nBrightness)
@@ -109,7 +168,7 @@ namespace ImageProcessor.Filters
 
             int red, green, blue;
 
-            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+            // ГДИ+ нас још увек лаже
             BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
 
             int stride = bmData.Stride;
