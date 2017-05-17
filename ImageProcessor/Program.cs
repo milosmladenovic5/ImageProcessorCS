@@ -16,7 +16,12 @@ namespace ImageProcessor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            MainWindow view = new MainWindow();
+            Model.IModel model = new Model.ImageModel();
+            Controller.IController controller = new Controller.Controller(view, model);
+
+            Application.Run(view);
         }
     }
 }
