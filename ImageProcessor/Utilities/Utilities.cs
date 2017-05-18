@@ -17,7 +17,7 @@ namespace ImageProcessor.Utilities
 
             using (var form = new Parameters())
             {
-                form.Name = formText;
+                form.Text = formText;
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
                 {
@@ -28,7 +28,7 @@ namespace ImageProcessor.Utilities
             return val;
         }
 
-        public static int Clamp(int value, int min, int max)
+        public static double Clamp(double value, double min, double max)
         {
             return (value < min) ? min : (value > max) ? max : value;
         }

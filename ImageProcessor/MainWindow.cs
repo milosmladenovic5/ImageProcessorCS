@@ -47,15 +47,51 @@ namespace ImageProcessor
             this.pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
-        protected override void OnResize(EventArgs e)
-        {
-            this.pictureBox.Height = this.Height - statusBar.Height;
-            this.pictureBox.Width = this.Width;
-        }
+       
 
         public void AddListener(IController controller)
         {
             this.controller = controller;
+        }
+
+        public void RedrawInvoker()
+        {
+            this.BeginInvoke(new MethodInvoker(delegate
+            {
+                this.MainMenuStrip.Enabled = true;
+                this.Refresh();
+            }));
+        }
+
+        public void Redraw()
+        {
+            this.Refresh();
+        }
+
+        public void EnableControls()
+        {
+            this.save.Enabled = true;
+            this.editToolStripMenuItem.Enabled = true;
+            this.optionsToolStripMenuItem.Enabled = true;
+            this.filtersToolStripMenuItem.Enabled = true;
+        }
+
+        public void RedrawImageOnly()
+        {
+            this.BeginInvoke(new MethodInvoker(delegate
+            {
+                this.Refresh();
+            }));
+        }
+
+
+
+        // ------------------------------ EVENT HANDLERS -------------------------------------------------------------------
+
+        protected override void OnResize(EventArgs e)
+        {
+            this.pictureBox.Height = this.Height - statusBar.Height;
+            this.pictureBox.Width = this.Width;
         }
 
         private void LoadImage(object sender, EventArgs e)
@@ -130,29 +166,25 @@ namespace ImageProcessor
 
         private void Gamma(object sender, EventArgs e)
         {
+            double r = Utilities.Utilities.Clamp(Utilities.Utilities.GetParameters("Red ", "Value(0.2, 5): "), 0.2, 5);
+            double g = Utilities.Utilities.Clamp(Utilities.Utilities.GetParameters("Green ", "Value(0.2, 5): "), 0.2, 5);
+            double b = Utilities.Utilities.Clamp(Utilities.Utilities.GetParameters("Blue ", "Value(0.2, 5): "), 0.2, 5);
 
+            this.mainMenu.Enabled = false;
+            this.controller.Color((int)r, (int)g, (int)b);
         }
 
         private void Color(object sender, EventArgs e)
         {
+            double r = Utilities.Utilities.Clamp((int)Utilities.Utilities.GetParameters("Red ", "Value(-255, 255): "), -255, 255);
+            double g = Utilities.Utilities.Clamp((int)Utilities.Utilities.GetParameters("Green ", "Value(-255, 255): "), -255, 255);
+            double b = Utilities.Utilities.Clamp((int)Utilities.Utilities.GetParameters("Blue ", "Value(-255, 255): "), -255, 255);
 
-        }
-
-        public void RedrawInvoker()
-        {
-            this.BeginInvoke(new MethodInvoker(delegate
-            {
-                this.MainMenuStrip.Enabled = true;
-                this.Refresh();
-            }));
+            this.mainMenu.Enabled = false;
+            this.controller.Color((int)r, (int)g, (int)b);
         }
 
   
-
-        public void Redraw()
-        {
-            this.Refresh();
-        }
 
         private void GaussianBlur(object sender, EventArgs e)
         {
@@ -173,12 +205,64 @@ namespace ImageProcessor
             MessageBox.Show("Fucking done");
         }
 
-        public void RedrawImageOnly()
+     
+
+        private void EdgeEnhance(object sender, EventArgs e)
         {
-            this.BeginInvoke(new MethodInvoker(delegate
-            {
-                this.Refresh();
-            }));
+            double param = Utilities.Utilities.Clamp((int)Utilities.Utilities.GetParameters("Edge enhance ", "Weight: "), 1, 4);
+            this.controller.FilterParam = param;
+            this.mainMenu.Enabled = false;
+            this.controller.EdgeEnhance();
+        }
+
+        private void FlipHorizontal(object sender, EventArgs e)
+        {
+            this.controller.FilterParam = 1.0;
+            this.mainMenu.Enabled = false;
+            this.controller.Flip();
+        }
+
+        private void FlipVertical(object sender, EventArgs e)
+        {
+            this.controller.FilterParam = 2.0;
+            this.mainMenu.Enabled = false;
+            this.controller.Flip();
+        }
+
+        private void DisplacementSmoothChange(object sender, EventArgs e)
+        {
+            this.displacementSmoothToolStripMenuItem.Checked = !this.displacementSmoothToolStripMenuItem.Checked;
+            this.controller.DisplacementSmooth = this.displacementSmoothToolStripMenuItem.Checked;
+        }
+
+        private void Swirl(object sender, EventArgs e)
+        {
+            double param = Utilities.Utilities.Clamp((int)Utilities.Utilities.GetParameters("Swirl", "Degree: "), 0.5, 360);
+            this.controller.FilterParam = param;
+            this.mainMenu.Enabled = false;
+            this.controller.Swirl();
+        }
+
+        private void Sphere(object sender, EventArgs e)
+        {
+            this.mainMenu.Enabled = false;
+            this.controller.Sphere();
+        }
+
+        private void TimeWarp(object sender, EventArgs e)
+        {
+            double param = Utilities.Utilities.Clamp((int)Utilities.Utilities.GetParameters("TimeWarp", "Factor: "), 0, 255);
+            this.controller.FilterParam = param;
+            this.mainMenu.Enabled = false;
+            this.controller.TimeWarp();
+        }
+
+        private void Pixelate(object sender, EventArgs e)
+        {
+            double param = Utilities.Utilities.Clamp((int)Utilities.Utilities.GetParameters("Pixelate", "Pixel: "), 0, 255);
+            this.controller.FilterParam = param;
+            this.mainMenu.Enabled = false;
+            this.controller.Pixelate();
         }
     }
 }

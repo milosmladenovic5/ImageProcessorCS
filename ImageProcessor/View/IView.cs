@@ -12,9 +12,11 @@ namespace ImageProcessor.View
         System.Drawing.Image Image { get; set; }
         string ImageInfo { set;}
 
+        void EnableControls();
         void RedrawInvoker();
         void RedrawImageOnly();
         void Redraw();
+        
 
     }
 }

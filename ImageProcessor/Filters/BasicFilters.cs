@@ -89,7 +89,6 @@ namespace ImageProcessor.Filters
             b.UnlockBits(bmData);
         }
 
-
         public static void GrayscaleMarshal(Bitmap b)
         {
             BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
@@ -228,10 +227,7 @@ namespace ImageProcessor.Filters
 
         public static bool Gamma(Bitmap b, double red, double green, double blue)
         {
-            if (red < .2 || red > 5) return false;
-            if (green < .2 || green > 5) return false;
-            if (blue < .2 || blue > 5) return false;
-
+          
             byte[] redGamma = new byte[256];
             byte[] greenGamma = new byte[256];
             byte[] blueGamma = new byte[256];
@@ -276,11 +272,7 @@ namespace ImageProcessor.Filters
 
         public static bool Color(Bitmap b, int red, int green, int blue)
         {
-            if (red < -255 || red > 255) return false;
-            if (green < -255 || green > 255) return false;
-            if (blue < -255 || blue > 255) return false;
-
-            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+     
             BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
 
             int stride = bmData.Stride;
@@ -316,6 +308,72 @@ namespace ImageProcessor.Filters
             }
 
             b.UnlockBits(bmData);
+
+            return true;
+        }
+
+        public static bool EdgeEnhance(Bitmap b, byte nThreshold)
+        {
+            // This one works by working out the greatest difference between a nPixel and it's eight neighbours.
+            // The threshold allows softer edges to be forced down to black, use 0 to negate it's effect.
+            Bitmap b2 = (Bitmap)b.Clone();
+
+
+            BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData bmData2 = b2.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            int stride = bmData.Stride;
+            System.IntPtr Scan0 = bmData.Scan0;
+            System.IntPtr Scan02 = bmData2.Scan0;
+
+            unsafe
+            {
+                byte* p = (byte*)(void*)Scan0;
+                byte* p2 = (byte*)(void*)Scan02;
+
+                int nOffset = stride - b.Width * 3;
+                int nWidth = b.Width * 3;
+
+                int nPixel = 0, nPixelMax = 0;
+
+                p += stride;
+                p2 += stride;
+
+                for (int y = 1; y < b.Height - 1; ++y)
+                {
+                    p += 3;
+                    p2 += 3;
+
+                    for (int x = 3; x < nWidth - 3; ++x)
+                    {
+                        nPixelMax = Math.Abs((p2 - stride + 3)[0] - (p2 + stride - 3)[0]);
+
+                        nPixel = Math.Abs((p2 + stride + 3)[0] - (p2 - stride - 3)[0]);
+
+                        if (nPixel > nPixelMax) nPixelMax = nPixel;
+
+                        nPixel = Math.Abs((p2 - stride)[0] - (p2 + stride)[0]);
+
+                        if (nPixel > nPixelMax) nPixelMax = nPixel;
+
+                        nPixel = Math.Abs((p2 + 3)[0] - (p2 - 3)[0]);
+
+                        if (nPixel > nPixelMax) nPixelMax = nPixel;
+
+                        if (nPixelMax > nThreshold && nPixelMax > p[0])
+                            p[0] = (byte)Math.Max(p[0], nPixelMax);
+
+                        ++p;
+                        ++p2;
+                    }
+
+                    p += nOffset + 3;
+                    p2 += nOffset + 3;
+                }
+            }
+
+            b.UnlockBits(bmData);
+            b2.UnlockBits(bmData2);
 
             return true;
         }
