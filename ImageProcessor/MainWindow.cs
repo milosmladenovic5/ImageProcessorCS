@@ -276,5 +276,10 @@ namespace ImageProcessor
         {
             this.controller.Crop();
         }
+
+        private void Animate(object sender, EventArgs e)
+        {
+            this.controller.Animate();
+        }
     }
 }

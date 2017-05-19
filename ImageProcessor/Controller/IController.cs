@@ -34,7 +34,7 @@ namespace ImageProcessor.Controller
 
         void Undo();
         void Redo();
-
         void Crop();
+        void Animate();
     }
 }

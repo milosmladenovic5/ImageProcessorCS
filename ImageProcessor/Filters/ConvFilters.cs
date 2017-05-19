@@ -28,7 +28,6 @@ namespace ImageProcessor.Filters
 
     public static class ConvFilters
     {
-        // иначе Милош је слеп дечак
         public const short EDGE_DETECT_KIRSH = 1;
         public const short EDGE_DETECT_PREWITT = 2;
         public const short EDGE_DETECT_SOBEL = 3;

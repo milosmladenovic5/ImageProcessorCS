@@ -40,7 +40,6 @@
             this.seamCarving = new System.Windows.Forms.ToolStripMenuItem();
             this.cropToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.colorizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.displacementSmoothToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filtersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.brightness = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,6 +61,8 @@
             this.pixelateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusBar = new System.Windows.Forms.StatusBar();
             this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.animate = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
@@ -127,7 +128,7 @@
             // 
             this.undo.Name = "undo";
             this.undo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undo.Size = new System.Drawing.Size(145, 22);
+            this.undo.Size = new System.Drawing.Size(152, 22);
             this.undo.Text = "Undo";
             this.undo.Click += new System.EventHandler(this.Undo);
             // 
@@ -135,39 +136,32 @@
             // 
             this.redo.Name = "redo";
             this.redo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.redo.Size = new System.Drawing.Size(145, 22);
+            this.redo.Size = new System.Drawing.Size(152, 22);
             this.redo.Text = "Redo";
             this.redo.Click += new System.EventHandler(this.Redo);
             // 
             // seamCarving
             // 
             this.seamCarving.Name = "seamCarving";
-            this.seamCarving.Size = new System.Drawing.Size(145, 22);
+            this.seamCarving.Size = new System.Drawing.Size(152, 22);
             this.seamCarving.Text = "Seam carving";
             this.seamCarving.Click += new System.EventHandler(this.SeamCarving);
             // 
             // cropToolStripMenuItem
             // 
             this.cropToolStripMenuItem.Name = "cropToolStripMenuItem";
-            this.cropToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.cropToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cropToolStripMenuItem.Text = "Crop";
             this.cropToolStripMenuItem.Click += new System.EventHandler(this.cropToolStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.colorizeToolStripMenuItem,
             this.displacementSmoothToolStripMenuItem});
             this.optionsToolStripMenuItem.Enabled = false;
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
-            // 
-            // colorizeToolStripMenuItem
-            // 
-            this.colorizeToolStripMenuItem.Name = "colorizeToolStripMenuItem";
-            this.colorizeToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.colorizeToolStripMenuItem.Text = "Colorize";
             // 
             // displacementSmoothToolStripMenuItem
             // 
@@ -195,7 +189,9 @@
             this.swirlToolStripMenuItem,
             this.sphereToolStripMenuItem,
             this.timeWarpToolStripMenuItem,
-            this.pixelateToolStripMenuItem});
+            this.pixelateToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.animate});
             this.filtersToolStripMenuItem.Enabled = false;
             this.filtersToolStripMenuItem.Name = "filtersToolStripMenuItem";
             this.filtersToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
@@ -333,6 +329,18 @@
             this.pictureBox.TabIndex = 3;
             this.pictureBox.TabStop = false;
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(154, 6);
+            // 
+            // animate
+            // 
+            this.animate.Name = "animate";
+            this.animate.Size = new System.Drawing.Size(157, 22);
+            this.animate.Text = "Animate";
+            this.animate.Click += new System.EventHandler(this.Animate);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -373,7 +381,6 @@
         private System.Windows.Forms.ToolStripMenuItem edgeDetect;
         private System.Windows.Forms.ToolStripMenuItem water;
         private System.Windows.Forms.ToolStripMenuItem seamCarving;
-        private System.Windows.Forms.ToolStripMenuItem colorizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sharpen;
         private System.Windows.Forms.ToolStripMenuItem grayscale;
         private System.Windows.Forms.ToolStripMenuItem gamma;
@@ -389,6 +396,8 @@
         private System.Windows.Forms.ToolStripMenuItem pixelateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cropToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem animate;
     }
 }
 

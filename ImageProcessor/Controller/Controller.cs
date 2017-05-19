@@ -367,5 +367,14 @@ namespace ImageProcessor.Controller
             }
               
         }
+
+        public void Animate()
+        {
+            AnimationView av = new AnimationView(new Bitmap(this.model.Image));
+            av.Show();
+
+            av.Animate();
+           
+        }
     }
 }
