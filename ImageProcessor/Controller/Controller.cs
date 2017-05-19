@@ -9,6 +9,7 @@ using ImageProcessor.Utilities;
 using ImageProcessor.Filters;
 using System.Threading;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace ImageProcessor.Controller
 {
@@ -210,10 +211,10 @@ namespace ImageProcessor.Controller
 
                     this.model.Image = s.GetCarvedBitmap();
                     this.view.Image = this.model.Image;
-                    this.view.RedrawImageOnly();
+                    this.view.RedrawImageOnlyInvoker();
 
 
-                    this.view.ImageInfo = this.model.Image.Width + "x" + this.model.Image.Height;
+                   
                 }
                 this.view.RedrawInvoker();
 
@@ -346,6 +347,25 @@ namespace ImageProcessor.Controller
                 this.view.RedrawInvoker();
 
             }).Start();
+        }
+
+        public void Crop()
+        {
+           
+            using (var form = new CropView(new Bitmap(this.model.Image)))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    this.undoRedo.PushToUndoStack((Bitmap)this.model.Image.Clone());
+                    this.undoRedo.ClearRedoStack();
+
+                    this.model.Image = (Bitmap)form.Image;
+                    this.view.Image = this.model.Image;
+                    this.view.Redraw();
+                }
+            }
+              
         }
     }
 }

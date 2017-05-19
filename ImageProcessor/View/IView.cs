@@ -14,7 +14,7 @@ namespace ImageProcessor.View
 
         void EnableControls();
         void RedrawInvoker();
-        void RedrawImageOnly();
+        void RedrawImageOnlyInvoker();
         void Redraw();
         
 

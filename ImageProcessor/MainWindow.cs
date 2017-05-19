@@ -11,12 +11,15 @@ using ImageProcessor.View;
 using ImageProcessor.Controller;
 using ImageProcessor.Model;
 using ImageProcessor.Utilities;
+using System.Drawing.Drawing2D;
+using ImageProcessor;
 
 namespace ImageProcessor
 {
     public partial class MainWindow : Form, IView
     {
         private IController controller;
+    
 
         public Image Image
         {
@@ -42,12 +45,18 @@ namespace ImageProcessor
         public MainWindow()
         {
             InitializeComponent();
-            this.pictureBox.Height = this.Height - statusBar.Height;
+
+        
+            //this.pictureBox.Location = new Point(0, this.mainMenu.Height);
+
+            this.pictureBox.Height = this.Height - statusBar.Height - this.mainMenu.Height;
             this.pictureBox.Width = this.Width;
             this.pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.statusBar.BringToFront();
+
         }
 
-       
+      
 
         public void AddListener(IController controller)
         {
@@ -65,6 +74,7 @@ namespace ImageProcessor
 
         public void Redraw()
         {
+            this.statusBar.Text = Image.Width + " x " + Image.Height;
             this.Refresh();
         }
 
@@ -76,11 +86,11 @@ namespace ImageProcessor
             this.filtersToolStripMenuItem.Enabled = true;
         }
 
-        public void RedrawImageOnly()
+        public void RedrawImageOnlyInvoker()
         {
             this.BeginInvoke(new MethodInvoker(delegate
             {
-                this.Refresh();
+                this.Redraw();
             }));
         }
 
@@ -90,8 +100,9 @@ namespace ImageProcessor
 
         protected override void OnResize(EventArgs e)
         {
-            this.pictureBox.Height = this.Height - statusBar.Height;
+            this.pictureBox.Height = this.Height - statusBar.Height-this.mainMenu.Height;
             this.pictureBox.Width = this.Width;
+
         }
 
         private void LoadImage(object sender, EventArgs e)
@@ -200,12 +211,8 @@ namespace ImageProcessor
             this.controller.FilterParam = param;
             this.mainMenu.Enabled = false;
 
-            this.controller.Carve();
-    
-            MessageBox.Show("Fucking done");
-        }
-
-     
+            this.controller.Carve();    
+        }    
 
         private void EdgeEnhance(object sender, EventArgs e)
         {
@@ -263,6 +270,11 @@ namespace ImageProcessor
             this.controller.FilterParam = param;
             this.mainMenu.Enabled = false;
             this.controller.Pixelate();
+        }   
+
+        private void cropToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.controller.Crop();
         }
     }
 }

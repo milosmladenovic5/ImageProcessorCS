@@ -15,7 +15,7 @@ namespace ImageProcessor.Filters
         {
             Bitmap bSrc = (Bitmap)b.Clone();
 
-            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+        
             BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             BitmapData bmSrc = bSrc.LockBits(new Rectangle(0, 0, bSrc.Width, bSrc.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
 

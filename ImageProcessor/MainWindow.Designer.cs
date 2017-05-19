@@ -38,6 +38,7 @@
             this.undo = new System.Windows.Forms.ToolStripMenuItem();
             this.redo = new System.Windows.Forms.ToolStripMenuItem();
             this.seamCarving = new System.Windows.Forms.ToolStripMenuItem();
+            this.cropToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.displacementSmoothToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,9 +59,9 @@
             this.swirlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sphereToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timeWarpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.statusBar = new System.Windows.Forms.StatusBar();
             this.pixelateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusBar = new System.Windows.Forms.StatusBar();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
@@ -74,7 +75,7 @@
             this.filtersToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(848, 24);
+            this.mainMenu.Size = new System.Drawing.Size(788, 24);
             this.mainMenu.TabIndex = 0;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -115,7 +116,8 @@
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.undo,
             this.redo,
-            this.seamCarving});
+            this.seamCarving,
+            this.cropToolStripMenuItem});
             this.editToolStripMenuItem.Enabled = false;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
@@ -143,6 +145,13 @@
             this.seamCarving.Size = new System.Drawing.Size(145, 22);
             this.seamCarving.Text = "Seam carving";
             this.seamCarving.Click += new System.EventHandler(this.SeamCarving);
+            // 
+            // cropToolStripMenuItem
+            // 
+            this.cropToolStripMenuItem.Name = "cropToolStripMenuItem";
+            this.cropToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.cropToolStripMenuItem.Text = "Crop";
+            this.cropToolStripMenuItem.Click += new System.EventHandler(this.cropToolStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
             // 
@@ -302,21 +311,6 @@
             this.timeWarpToolStripMenuItem.Text = "Time warp";
             this.timeWarpToolStripMenuItem.Click += new System.EventHandler(this.TimeWarp);
             // 
-            // pictureBox
-            // 
-            this.pictureBox.Location = new System.Drawing.Point(-10, 27);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(855, 390);
-            this.pictureBox.TabIndex = 1;
-            this.pictureBox.TabStop = false;
-            // 
-            // statusBar
-            // 
-            this.statusBar.Location = new System.Drawing.Point(0, 453);
-            this.statusBar.Name = "statusBar";
-            this.statusBar.Size = new System.Drawing.Size(848, 22);
-            this.statusBar.TabIndex = 2;
-            // 
             // pixelateToolStripMenuItem
             // 
             this.pixelateToolStripMenuItem.Name = "pixelateToolStripMenuItem";
@@ -324,13 +318,28 @@
             this.pixelateToolStripMenuItem.Text = "Pixelate";
             this.pixelateToolStripMenuItem.Click += new System.EventHandler(this.Pixelate);
             // 
+            // statusBar
+            // 
+            this.statusBar.Location = new System.Drawing.Point(0, 401);
+            this.statusBar.Name = "statusBar";
+            this.statusBar.Size = new System.Drawing.Size(788, 22);
+            this.statusBar.TabIndex = 2;
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.Location = new System.Drawing.Point(0, 27);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(258, 142);
+            this.pictureBox.TabIndex = 3;
+            this.pictureBox.TabStop = false;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 475);
-            this.Controls.Add(this.statusBar);
+            this.ClientSize = new System.Drawing.Size(788, 423);
             this.Controls.Add(this.pictureBox);
+            this.Controls.Add(this.statusBar);
             this.Controls.Add(this.mainMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenu;
@@ -357,7 +366,6 @@
         private System.Windows.Forms.ToolStripMenuItem filtersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem undo;
         private System.Windows.Forms.ToolStripMenuItem redo;
-        private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.StatusBar statusBar;
         private System.Windows.Forms.ToolStripMenuItem brightness;
         private System.Windows.Forms.ToolStripMenuItem contrast;
@@ -379,6 +387,8 @@
         private System.Windows.Forms.ToolStripMenuItem sphereToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem timeWarpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pixelateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cropToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pictureBox;
     }
 }
 

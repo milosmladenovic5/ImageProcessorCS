@@ -51,8 +51,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnimationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnimationView.Designer.cs">
+      <DependentUpon>AnimationView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controller\Controller.cs" />
     <Compile Include="Controller\IController.cs" />
+    <Compile Include="CropView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CropView.Designer.cs">
+      <DependentUpon>CropView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Filters\BasicFilters.cs" />
     <Compile Include="Filters\ConvFilters.cs" />
     <Compile Include="Filters\DispFilters.cs" />
@@ -76,6 +88,12 @@
     <Compile Include="Utilities\UndoRedo.cs" />
     <Compile Include="Utilities\Utilities.cs" />
     <Compile Include="View\IView.cs" />
+    <EmbeddedResource Include="AnimationView.resx">
+      <DependentUpon>AnimationView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CropView.resx">
+      <DependentUpon>CropView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
