@@ -42,7 +42,7 @@ namespace ImageProcessor
             this.pictureBox1.Width = this.Width;
             this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            //Filters.BasicFilters.GrayscaleMarshal(edgeImage);
+            Filters.BasicFilters.GrayscaleMarshal(edgeImage);
             Filters.ConvFilters.EdgeDetectConvolution(edgeImage, 1, 0);
             
         }
@@ -67,7 +67,7 @@ namespace ImageProcessor
                 {
                     for (int x = 0; x < edgeImage.Width; ++x)
                     {
-                        if ((int)(p[2] + p[1] + p[0]) > 500)
+                        if ((int)(p[2] + p[1] + p[0]) > 700)
                         {
                             pixels.Add(new PixelRGB(x, y, p[2], p[1], p[0]));
                         }
@@ -102,47 +102,33 @@ namespace ImageProcessor
             {
                 List<PixelRGB> pixels = ExtractPixels();
                 Bitmap result = new Bitmap(this.Image.Width, this.Image.Height);
-
-                //using (Graphics g = Graphics.FromImage(result))
-                //{
-                //    g.FillRectangle(Brushes.Black, new Rectangle(0, 0, result.Width, result.Height));
-                //    this.pictureBox1.Image = result;
-                //}
-                this.pictureBox1.Image = result;
-
-                for (int i = 0; i < pixels.Count - 50; i += 50)
+              
+                using (Graphics g = Graphics.FromImage(result))
                 {
+                    g.FillRectangle(Brushes.Black, new Rectangle(0, 0, result.Width, result.Height));
+                    this.pictureBox1.Image = result;
 
-                    for (int j = 0; j < 50; j++)
+                    for (int i = 0; i < pixels.Count - 50; i += 50)
                     {
-                        Utilities.Utilities.SetPixel(result, pixels[i + j].xPos, pixels[i + j].yPos, Color.FromArgb(pixels[i + j].R, pixels[i + j].G, pixels[i + j].B));
+
+                        for (int j = 0; j < 50; j++)
+                        {
+                            var brush = new SolidBrush(Color.FromArgb(pixels[i + j].R, pixels[i + j].G, pixels[i + j].B));
+                            g.FillRectangle(brush, pixels[i + j].xPos, pixels[i + j].yPos, 1, 1);
+                        }
+
+                        Thread.Sleep(3);                    
+                        this.RedrawInvoker();
                     }
-                    this.RedrawInvoker();
+
                 }
-
-                    //using (Graphics g = Graphics.FromImage(result))
-                    //{
-                    //    g.FillRectangle(Brushes.Black, new Rectangle(0, 0, result.Width, result.Height));
-                    //    this.pictureBox1.Image = result;
-
-                    //    for (int i = 0; i < pixels.Count - 50; i += 50)
-                    //    {
-
-                    //        for (int j = 0; j < 50; j++)
-                    //        {
-                    //            var brush = new SolidBrush(Color.FromArgb(pixels[i + j].R, pixels[i + j].G, pixels[i + j].B));
-                    //            g.FillRectangle(brush, pixels[i + j].xPos, pixels[i + j].yPos, 1, 1);
-                    //        }
-
-                    //        this.RedrawInvoker();
-                    //    }
-
-                    //}
-                    MessageBox.Show("Done.");
+                MessageBox.Show("Done.");
 
             }).Start();
 
-
+            //O CEMU SE RADI ZASTO GOVNO BLOKIRA!!!!
+            //dakle, osvezava konstantno prikaz, prebrzo i ne moze da se dira forma za to vreme, 
+            //zato što je to delegat!!
         }
 
         public void RedrawInvoker()
