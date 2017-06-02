@@ -213,7 +213,7 @@ namespace ImageProcessor
                 int removeIndex = this.path[y].x * 3;
                 Buffer.BlockCopy(data, 0, temp, 0, removeIndex);
                 Buffer.BlockCopy(data, removeIndex + 3, temp, removeIndex, this.m_bitmap.Width * 3 - removeIndex - 3);
-                // m_bitmap.Width * 3 ZATO STO: WIDTH SE MENJA  - STRIDE IZ NEKOG RAZLOGA OSTAJE ISTI #@!!@
+             
 
                 System.Runtime.InteropServices.Marshal.Copy(temp, 0, r, temp.Length);
 
