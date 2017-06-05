@@ -34,12 +34,11 @@ namespace ImageProcessor.Filters
 
         public static bool Conv3x3(Bitmap b, ConvMatrix m)
         {
-            // Avoid divide by zero errors
+       
             if (0 == m.Factor) return false;
 
             Bitmap bSrc = (Bitmap)b.Clone();
 
-            // GDI+ still lies to us - the return format is BGR, NOT RGB.
             BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             BitmapData bmSrc = bSrc.LockBits(new Rectangle(0, 0, bSrc.Width, bSrc.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
 
@@ -136,7 +135,7 @@ namespace ImageProcessor.Filters
         {
             ConvMatrix m = new ConvMatrix();
 
-            // I need to make a copy of this bitmap BEFORE I alter it 80)
+         
             Bitmap bTemp = (Bitmap)b.Clone();
 
             switch (nType)
@@ -191,7 +190,7 @@ namespace ImageProcessor.Filters
 
             Conv3x3(bTemp, m);
 
-            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+         
             BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             BitmapData bmData2 = bTemp.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
 

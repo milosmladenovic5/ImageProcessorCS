@@ -368,9 +368,9 @@ namespace ImageProcessor.Controller
               
         }
 
-        public void Animate()
+        public void Animate(int edgeThreshold, int edgesAtOnce)
         {
-            AnimationView av = new AnimationView(new Bitmap(this.model.Image));
+            AnimationView av = new AnimationView(new Bitmap(this.model.Image), edgeThreshold, edgesAtOnce);
             av.Show();
 
             av.Animate();

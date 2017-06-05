@@ -35,6 +35,6 @@ namespace ImageProcessor.Controller
         void Undo();
         void Redo();
         void Crop();
-        void Animate();
+        void Animate(int edgeThreshold, int edgesAtOnce);
     }
 }

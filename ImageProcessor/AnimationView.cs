@@ -16,8 +16,11 @@ namespace ImageProcessor
   
     public partial class AnimationView : Form
     {
+        private Thread worker;
         private Bitmap image;
         private Bitmap edgeImage;
+        private int edgeThreshold = 700; // default
+        private int edgesAtOnce = 50;
 
         public Bitmap Image
         {
@@ -47,11 +50,27 @@ namespace ImageProcessor
             
         }
 
+        public AnimationView(Bitmap bmp, int edgeThreshold, int edgesAtOnce)
+        {
+            InitializeComponent();
+            this.image = bmp;
+            this.edgeThreshold = edgeThreshold;
+            this.edgesAtOnce = edgesAtOnce;
+            this.edgeImage = (Bitmap)bmp.Clone();
+            this.pictureBox1.Height = this.Height;
+            this.pictureBox1.Width = this.Width;
+            this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            Filters.BasicFilters.GrayscaleMarshal(edgeImage);
+            Filters.ConvFilters.EdgeDetectConvolution(edgeImage, 1, 0);
+
+        }
+
         public List<PixelRGB> ExtractPixels()
         {
             List<PixelRGB> pixels = new List<PixelRGB>();
 
-            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+   
             BitmapData bmData = this.edgeImage.LockBits(new Rectangle(0, 0, edgeImage.Width, edgeImage.Height), ImageLockMode.ReadWrite, edgeImage.PixelFormat);// PixelFormat.Format24bppRgb);
 
             int stride = bmData.Stride;
@@ -67,7 +86,7 @@ namespace ImageProcessor
                 {
                     for (int x = 0; x < edgeImage.Width; ++x)
                     {
-                        if ((int)(p[2] + p[1] + p[0]) > 700)
+                        if ((int)(p[2] + p[1] + p[0]) > this.edgeThreshold)
                         {
                             pixels.Add(new PixelRGB(x, y, p[2], p[1], p[0]));
                         }
@@ -98,37 +117,56 @@ namespace ImageProcessor
 
         public void Animate()
         {
-            new Thread(() =>
+            try
             {
-                List<PixelRGB> pixels = ExtractPixels();
-                Bitmap result = new Bitmap(this.Image.Width, this.Image.Height);
-              
-                using (Graphics g = Graphics.FromImage(result))
-                {
-                    g.FillRectangle(Brushes.Black, new Rectangle(0, 0, result.Width, result.Height));
-                    this.pictureBox1.Image = result;
+                this.worker = new Thread(() =>
+                     {
+                         List<PixelRGB> pixels = ExtractPixels();
+                         Bitmap result = new Bitmap(Image.Width, this.Image.Height);
 
-                    for (int i = 0; i < pixels.Count - 50; i += 50)
-                    {
+                         using (Graphics g = Graphics.FromImage(result))
+                         {
+                             g.FillRectangle(Brushes.Black, new Rectangle(0, 0, result.Width, result.Height));
+                             this.pictureBox1.Image = result;
 
-                        for (int j = 0; j < 50; j++)
-                        {
-                            var brush = new SolidBrush(Color.FromArgb(pixels[i + j].R, pixels[i + j].G, pixels[i + j].B));
-                            g.FillRectangle(brush, pixels[i + j].xPos, pixels[i + j].yPos, 1, 1);
-                        }
+                             for (int i = 0; i < pixels.Count /*- this.edgesAtOnce*/; i += this.edgesAtOnce)
+                             {
 
-                        Thread.Sleep(3);                    
-                        this.RedrawInvoker();
-                    }
+                                 for (int j = 0; j < this.edgesAtOnce; j++)
+                                 {
+                                     if (i + j >= pixels.Count) break; // mora ovako da ne bi preskakalo na kraju, ruzno je..
+                                     var brush = new SolidBrush(Color.FromArgb(pixels[i + j].R, pixels[i + j].G, pixels[i + j].B));
+                                     g.FillRectangle(brush, pixels[i + j].xPos, pixels[i + j].yPos, 1, 1);
 
-                }
-                MessageBox.Show("Done.");
+                                 }
 
-            }).Start();
+                                 Thread.Sleep(3);
+                                 this.RedrawInvoker();
+                             }
+                             Thread.Sleep(300);
+                             this.pictureBox1.Image = this.image;
+                             this.RedrawInvoker();
 
-            //O CEMU SE RADI ZASTO GOVNO BLOKIRA!!!!
-            //dakle, osvezava konstantno prikaz, prebrzo i ne moze da se dira forma za to vreme, 
-            //zato što je to delegat!!
+                         }
+                       //MessageBox.Show("Done.");
+
+                   });
+                this.worker.Start();
+            }
+            catch (Exception e)
+            {
+                Console.Write(e);
+            }
+
+  
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            //Environment.Exit(Environment.ExitCode);
+            if(this.worker != null)
+                this.worker.Abort();
         }
 
         public void RedrawInvoker()

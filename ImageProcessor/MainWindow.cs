@@ -279,7 +279,9 @@ namespace ImageProcessor
 
         private void Animate(object sender, EventArgs e)
         {
-            this.controller.Animate();
+            int edgeThreshold = (int)Utilities.Utilities.Clamp((int)Utilities.Utilities.GetParameters("Edge threshold", "Ignore r + g + b below(500, 700): "), 500, 700);
+            int edgesAtOnce = (int)Utilities.Utilities.Clamp((int)Utilities.Utilities.GetParameters("Draw at once", "Draw at once limit(200, 5000): "), 200, 5000);
+            this.controller.Animate(edgeThreshold, edgesAtOnce);
         }
     }
 }
