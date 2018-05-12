@@ -50,7 +50,7 @@ Početna stranica
 
 Kada se aplikacija startuje, početni ekran izgleda ovako:
 
-![alt text](https://imgur.com/a/OZdfbe1)
+![alt text](https://imgur.com/jMrxazB)
 
 
 Obzirom na to da nijedna slika nije učitana za prikaz u aplikaciji,
