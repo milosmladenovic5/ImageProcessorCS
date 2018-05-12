@@ -50,7 +50,7 @@ Početna stranica
 
 Kada se aplikacija startuje, početni ekran izgleda ovako:
 
-![alt text](https://imgur.com/gallery/OZdfbe1)
+![alt text](https://i.imgur.com/jMrxazB.png)
 
 
 Obzirom na to da nijedna slika nije učitana za prikaz u aplikaciji,
@@ -67,7 +67,7 @@ ovim alatom.
 
 Nakon odabira željene slike za učivavanje, ona će se prikazati na radnoj
 površini aplikacije, ispod menija:\
-![](media/image3.png){width="6.5in" height="4.397916666666666in"}\
+![alt text](https://i.imgur.com/AZm0cTr.png)
 Aplikacija je resizeable, kako bi se slike koje su manje veličine dobro
 prikazale na ekranu i videli svi detalji koji su promenjeni primenom
 nekih od filtara. U dnu ekrana se nalazi statusna linija koja prikazuje
@@ -80,18 +80,18 @@ Traka sa menijima se nalazi na vrhu aplikacije, ispod naziva i logoa i
 nudi razne mogućnosti koje će dalje u ovom delu biti opisane, ali prvo
 da vidimo njen izgled i sve podmenije:
 
-![](media/image4.png){width="6.5in" height="0.21736111111111112in"}
+![alt text](https://i.imgur.com/1EaOYm4.png)
 
-![](media/image5.png){width="1.0416666666666667in"
-height="0.9166666666666666in"}
-![](media/image6.png){width="1.5416666666666667in"
-height="1.1666666666666667in"}
-![](media/image7.png){width="1.6145833333333333in"
-height="0.4895833333333333in"}![](media/image8.png){width="1.6770833333333333in"
-height="4.25in"}
+![alt text](https://i.imgur.com/h30vXs4.png)
 
-![](media/image9.png){width="2.9166666666666665in"
-height="1.8958333333333333in"}
+![alt text](https://i.imgur.com/brATMKj.png)
+
+![alt text](https://i.imgur.com/vhGqie4.png)
+
+![alt text](https://i.imgur.com/kRqg3Kc.png)
+
+![alt text](https://i.imgur.com/Kfm1iTk.png)
+
 
 Prvi i drugi meni su korisnički intuitivni i smatram da ih ne bi trebalo
 objašnjavati. Jedino vredno napomene jeste da u meniju Edit stoje opcije
@@ -101,13 +101,13 @@ ograničenja samog algoritma, nije preporučljivo unositivrednosti veće od
 100, jer će vrlo verovatno izvršiti deformaciju i bitnih delova slike.
 ***Crop*** opcija će biti prikazana na sledećih nekoliko screenshotova.
 
-![](media/image10.png){width="5.5574475065616795in" height="3.3125in"}
+![alt text](https://i.imgur.com/du3yEeR.png)
 
-![](media/image11.png){width="5.645833333333333in"
-height="3.819382108486439in"}
+![alt text](https://i.imgur.com/7WXdV8G.png)
 
-![](media/image12.png){width="4.846779308836395in"
-height="5.635416666666667in"}
+
+![alt text](https://i.imgur.com/KkUccEr.png)
+
 
 Kako bi se isecanje slike i izvršilo pravilno **vrlo je bitno**
 ***selekciju vršiti od gornjeg levog ugla željene oblasti ka donjem
@@ -126,49 +126,52 @@ sledećeg menija: ***smooth*** ili ne.
     osvetljenja u dijalog koji nam je ponuđen, prikaz slike se promeni,
     kao na sledeće 2 slike:
 
-![](media/image13.png){width="5.104166666666667in"
-height="3.4643985126859143in"}
+![alt text](https://i.imgur.com/BukWjYT.png)
 
-> ![](media/image14.png){width="5.332069116360455in"
-> height="3.425398075240595in"}
+
+![alt text](https://i.imgur.com/W3Sv6qG.png)
+
 
 2.  **"Contrast" --** menja kontrast slike u zavisnosti od unetog
     parametra. **Vrednost contrast parametra treba da bude između -100
     i 100.**
+    
+![alt text](https://i.imgur.com/Jg87za0.png)
 
-![](media/image15.png){width="4.979166666666667in"
-height="3.37370406824147in"}
 
-![](media/image16.png){width="6.5in" height="4.159027777777778in"}
+![alt text](https://i.imgur.com/hWoB37d.png)
 
-3.  ![](media/image17.png){width="2.9479166666666665in"
-    height="3.2284722222222224in"}![](media/image18.png){width="3.120833333333333in"
-    height="3.09375in"}"**Grayscale"** -- prebacuje sliku iz običnog
+3.  ![alt text](https://i.imgur.com/hnUoPjE.png)
+    
+    ![alt text](https://i.imgur.com/2a7n9Q8.png)
+    
+    **Grayscale"** -- prebacuje sliku iz običnog
     prikaza u prikaz svih nivoa sive.
 
 4.  "**Color" --** primenjuje color filter nad slikom, nakon što
     uzastopno unesete vrednosti za crvenu, plavu i zelenu boju u input
     box.\
     \
-    ![](media/image19.png){width="2.875in"
-    height="3.1667902449693788in"}![](media/image20.png){width="2.762707786526684in"
-    height="2.7708333333333335in"}
+        ![alt text](https://i.imgur.com/f59ZRQP.png)
+
+       ![alt text](https://i.imgur.com/3QG2VYS.png)
+
 
 5.  "**Edge enhance" --** filter koji se primenjuje nad slikom da bi se
     naglasile ivice. **Vrednost parametra za edge enhance treba da bude
     od 0 do 30.\
     \
-    **![](media/image21.png){width="2.8541666666666665in"
-    height="2.873596894138233in"}
-    ![](media/image22.png){width="2.8198272090988628in"
-    height="2.7291666666666665in"}
+    **    ![alt text](https://i.imgur.com/FNsLetB.png)
+
+         ![alt text](https://i.imgur.com/YW24iKq.png)
+
 
 Preostali filteri funkcionišu na identičan način.
 
 Opcija *Animate*
 ----------------
 
-![](media/image23.png){width="1.6458333333333333in" height="4.25in"}
+![alt text](https://i.imgur.com/Gr9PMmR.png)
 
 Nakon izbora ove opcije najpre se otvaraju dva dijaloga za unos
 parametara:
@@ -182,20 +185,21 @@ parametara:
     dozvoljene vrednosti na slikama veće rezolucije moguće je blokiranje
     forme za animaciju sve dok se animacija ne završi.)**
 
-> ![](media/image24.png){width="4.791666666666667in"
-> height="1.5104166666666667in"}
+![alt text](https://i.imgur.com/bTj57HI.png)
+
 
 Sledi uporedan prikaz originalne slike i animacije (u toku) respektivno
 :
 
-![](media/image25.png){width="6.5in" height="3.720138888888889in"}
+![alt text](https://i.imgur.com/LfiwaFw.png)
 
-![](media/image26.png){width="6.5in" height="3.939583333333333in"}
+![alt text](https://i.imgur.com/4fq4bKd.png)
+
 
 Undo / Redo
 -----------
 
-![](media/image27.png){width="1.53125in" height="1.1458333333333333in"}
+![alt text](https://i.imgur.com/k0q9cIu.png)
 
 Mogućnost poništavanja poslednje operacije ili ponovnog primenjivanja
 iste.
