@@ -63,7 +63,7 @@ Kao što je u pasusima iznad navedeno, aplikacija nudi učivanje ili
 „obične" jpg, png, bmp slike ili učitavanje slike prethodno kompresovane
 ovim alatom.
 
-![](media/image2.png){width="6.5in" height="3.7576388888888888in"}
+![alt text](https://i.imgur.com/VkGsQRy.png)
 
 Nakon odabira željene slike za učivavanje, ona će se prikazati na radnoj
 površini aplikacije, ispod menija:\
