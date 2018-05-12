@@ -161,8 +161,7 @@ sledećeg menija: ***smooth*** ili ne.
     naglasile ivice. **Vrednost parametra za edge enhance treba da bude
     od 0 do 30.\
     \
-    **    ![alt text](https://i.imgur.com/FNsLetB.png)
-
+         ![alt text](https://i.imgur.com/FNsLetB.png)
          ![alt text](https://i.imgur.com/YW24iKq.png)
 
 
