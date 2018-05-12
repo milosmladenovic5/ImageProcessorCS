@@ -6,7 +6,7 @@ Besides basic convolutional filters, contains interesting features like image cr
 
 **Korisničko uputstvo**
 
-**Sadržaj** {#sadržaj .TOCHeading}
+**Sadržaj** 
 ===========
 
 [1 Uvod 2](#uvod)
@@ -50,8 +50,8 @@ Početna stranica
 
 Kada se aplikacija startuje, početni ekran izgleda ovako:
 
-![](media/image1.png){width="5.854166666666667in"
-height="3.384283683289589in"}
+![alt text](https://imgur.com/a/OZdfbe1)
+
 
 Obzirom na to da nijedna slika nije učitana za prikaz u aplikaciji,
 meniji za obradu slike su onemogućeni za odabir.
